@@ -1,0 +1,74 @@
+//shell sort code with 5-sorting, 3-sorting, 1-sorting
+#include <iostream>
+
+using namespace std;
+const int size = 8;
+const int dim = 3;
+int gapsize[dim] = {5,3,1};
+int array[size];
+void swap(int *,int *);
+void shell_sort(int);
+void printarray();
+
+void shell_sort(int gap)
+{
+    for(int i = 0;i<gap;i++)
+    {
+        for(int j = (i+gap);j<size;j+=gap)
+        {
+            for(int x = j;x>i;x-=gap)
+            {
+                if(array[x]<array[x-gap])
+                {
+                    swap(&array[x],&array[x-gap]);
+                }
+            }
+        }
+    }
+}
+
+void swap(int *x,int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+
+void printarray()
+{
+    for(int a = 0;a<size;a++)
+    {
+        cout<<array[a]<<endl;
+    }
+}
+
+
+int main()
+{
+    for(int x = 0;x<size;x++)
+    {
+        cout<<"Please enter the next element in the array"<<endl;
+        cin>>array[x];
+    }
+
+    cout<<"The unsorted array is "<<endl<<endl;
+    printarray();
+
+    /*for(int a  = 0;a<dim;a++)
+    {
+        cout<<"Please enter the desired gap sizes in descending order"<<endl;
+        cin>>gapsize[a];   //THIS FOR LOOP HAS BEEN COMMENTED OUT
+    }
+    */
+
+
+    for(int l = 0;l<dim;l++)
+    {
+        shell_sort(gapsize[l]);
+    }
+    //shell_sort(5);
+    cout<<endl<<"The sorted array is "<<endl<<endl;
+    printarray();
+
+}

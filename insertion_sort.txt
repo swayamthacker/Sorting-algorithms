@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+const int size = 10;
+int array[size];
+void swap(int *,int*);
+void insertion_sort();
+void printarray();
+void print_unsorted();
+//int smallest;
+
+
+void insertion_sort()
+{
+    for(int i = 1;i<size;i++)
+    {
+
+        for(int j = i;j>0;j--)
+        {
+            if(array[j]<array[j-1])
+            {
+                swap(&array[j],&array[j-1]);
+            }
+        }
+    }
+    printarray();
+}
+
+void swap(int *x,int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+void printarray()
+{
+    cout<<"This is the sorted array"<<endl;
+    for(int j =0;j<size;j++)
+    cout<<array[j]<<endl;
+}
+
+void print_unsorted()
+{
+    cout<<"This is the unsorted array"<<endl;
+    for(int j =0;j<size;j++)
+    cout<<array[j]<<endl;
+}
+
+int main()
+{
+    for(int x = 0; x<size;x++)
+    {
+    cout<<"Please enter the elements that you want to store in the array"<<endl;
+    cin>>array[x];
+    }
+    print_unsorted();
+    insertion_sort();
+
+    return 0;
+}

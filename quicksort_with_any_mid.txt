@@ -1,0 +1,93 @@
+#include <iostream>
+
+using namespace std;
+
+void quicksort(int,int);
+const int size = 8;
+int array[size];
+int pivotindex;
+int start = 0;
+int end = size - 1;
+int store = (start+end)/2;
+//int value = -1;
+void swap(int *,int *);
+void printarray();
+
+int main()
+{
+    for(int i = 0; i<size;i++)
+    {
+        cout<<"Please enter the next element to be added to the array"<<endl;
+        cin>>array[i];
+    }
+    cout<<"This is the unsorted array:"<<endl;
+    printarray();
+
+    cout<<"Please enter the Pivot Index between 0 and 7"<<endl;
+    cin>>pivotindex;
+
+    swap(&array[pivotindex],&array[store]);
+    quicksort(start,end);
+    cout<<"This is the sorted array:"<<endl;
+    printarray();
+    return 0;
+}
+
+void quicksort(int start,int end)
+{
+
+    int pivotindex1 = (start+end)/2;
+    int i = start;
+    int j = end;
+    int pivot = array[pivotindex1];
+
+    while(i<=j)
+    {
+        //statement: //may not need goto statement here?
+
+        while(array[i]<pivot)
+        {
+            i++; //let the element stay there
+            //goto s tatement; //may not need goto statement here?
+        }
+        while(array[j]>pivot)
+        {
+            j--; //let the element stay there
+           // goto statement; //may not need goto statement here?
+        }
+        //need some condition here (if the sequence is  6 5 1 3 8 7 2 4, when the sequence becomes
+        //2 3 1 5 8 7 6 4, i =3 and j = 2. At that time, we cannot do the below swap function. Thus, only
+        //do the below swap when i<=j.
+        if(i<=j)
+        {
+        swap(&array[i],&array[j]);
+        i++;
+        j--;
+        }
+    }
+
+    if(start<j)
+    {
+    quicksort(start,j);
+    }
+    if(i<end)
+    {
+    quicksort(i,end);
+    }
+}
+
+void swap(int *x,int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+void printarray()
+{
+    for(int m = 0;m<size;m++)
+    {
+        cout<<array[m]<<" "<<endl;
+    }
+}

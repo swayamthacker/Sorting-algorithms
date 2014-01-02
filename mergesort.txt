@@ -1,0 +1,118 @@
+#include <iostream>
+
+using namespace std;
+const int size = 12;
+
+int temparray[size];
+int array[size];
+int start = 0;
+int end = size-1;
+void mergesort(int,int);
+void merge(int,int,int);
+
+
+void mergesort(int start,int end)
+{
+    if(start<end)
+    {
+        int mid = (start+end)/2;
+        mergesort(start,mid);
+        mergesort(mid+1,end);
+        merge(start,end,mid);
+    }
+}
+
+void merge(int start,int end,int mid)
+{
+    int begin = start;
+    int last = mid+1;
+    int count = start;
+    int value = 0;
+
+    while(begin<=mid&&last<=end)
+    {
+        if(array[begin]>=array[last])
+        {
+          temparray[count] = array[last];
+          count++;
+          last++;
+        }
+        else
+        {
+            temparray[count] = array[begin];
+            begin++;
+            count++;
+        }
+    }
+
+    if(last==(end+1))
+    {
+        value = 1;
+    }
+    else if(begin == (mid+1))
+    {
+        value = 2;
+    }
+    else
+    {
+        value = 0;
+    }
+
+    if(value==1)
+    {
+        while(count<=end&& begin<=mid)
+        {
+            temparray[count] = array[begin];
+            count++;
+            begin++;
+        }
+    }
+
+    if(value==2)
+    {
+        while(count<=end&&last<=end)
+        {
+            temparray[count] = array[last];
+            count++;
+            last++;
+        }
+    }
+
+    for(int a = start;a<=end;a++)
+    {
+        array[a] = temparray[a];
+    }
+
+
+
+}
+
+int main()
+{
+    for(int i =0;i<size;i++)
+    {
+        cout<<"Please enter the next element into the array"<<endl;
+        cin>>array[i];
+    }
+
+    cout<<"The unsorted array is "<<endl;
+    {
+        for(int x = 0;x<size;x++)
+        {
+            cout<<array[x]<<" ";
+        }
+        cout<<endl;
+    }
+
+    mergesort(start,end);
+
+    cout<<"The sorted array is "<<endl;
+    {
+        for(int z = 0;z<size;z++)
+        {
+            cout<<array[z]<<" ";
+        }
+        cout<<endl;
+    }
+
+}
